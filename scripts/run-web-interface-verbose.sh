@@ -63,7 +63,7 @@ log_with_label() {
 cd "$PROJECT_ROOT"
 
 # Start HTTP Gateway (Backend)
-echo -e "${GREEN}[START]${NC} HTTP Gateway starting on port 3000..."
+echo -e "${YELLOW}[START]${NC} HTTP Gateway starting on port 3000..."
 (
     cd "$PROJECT_ROOT"
     NODE_ENV=development DEBUG=* bun run src/gateway/http-gateway.ts 2>&1

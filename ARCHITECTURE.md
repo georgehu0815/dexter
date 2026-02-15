@@ -13,6 +13,44 @@
 10. [Event System](#event-system)
 
 ---
+Key Differences
+Feature	Web App	Evals App
+UI	React (Browser)	Ink (Terminal)
+Server	HTTP Gateway (port 3000)	None
+Agent Access	Via agent-runner.ts	Direct Agent.create()
+Concurrent Users	✅ Multiple sessions	❌ Single run
+Purpose	Interactive chat	Testing & evaluation
+Streaming	SSE over HTTP	AsyncGenerator in-process
+Logging	Console logs	LangSmith + terminal UI
+
+1. Web App (Uses HTTP Gateway)
+
+
+User Browser (localhost:5173)
+         ↓
+   React Frontend
+         ↓ HTTP/SSE
+   HTTP Gateway (localhost:3000) ← [http-gateway.ts]
+         ↓
+   Agent Runner → Agent.create()
+         ↓
+   Tools (finance, search, etc.)
+
+2. Evals App (Terminal-only, No HTTP)
+
+
+Terminal
+    ↓
+Ink UI (EvalApp.tsx) ← Terminal React components
+    ↓
+createEvaluationRunner() ← [run.ts]
+    ↓
+Agent.create() ← Direct agent invocation
+    ↓
+Tools (finance, search, etc.)
+    ↓
+LangSmith ← Logs results for tracking
+
 
 ## High-Level Architecture
 

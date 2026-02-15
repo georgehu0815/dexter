@@ -142,6 +142,22 @@ Or with watch mode for development:
 ```bash
 bun dev
 ```
+┌─────────────────────────────────────────────────────┐
+│  Dexter System - All Components Ready              │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  ✅ HTTP Gateway         http://localhost:3000     │
+│     Process: 51410       Status: Running           │
+│                                                     │
+│  ✅ VS Code Extension    Ready to launch (F5)      │
+│     Location: dexter-vscode/                       │
+│                                                     │
+│  ✅ Web Client          Ready (npm run web:client) │
+│     Will run on: http://localhost:5173            │
+│                                                     │
+│  ✅ CLI Interface       Ready (npm run dev:cli)    │
+│                                                     │
+└─────────────────────────────────────────────────────┘
 
 ## 📊 How to Evaluate
 

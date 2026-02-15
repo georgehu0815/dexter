@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "bun run src/index.tsx",
-    "dev": "bun --watch run src/index.tsx",
+    "dev": "concurrently \"npm run dev:cli\" \"npm run dev:server\"",
+    "dev:cli": "bun --watch run src/index.tsx",
+    "dev:server": "bun run src/gateway/http-gateway.ts",
     "gateway": "tsx src/gateway/index.ts run",
     "gateway:login": "tsx src/gateway/index.ts login",
     "web": "scripts/run-web-interface.sh",

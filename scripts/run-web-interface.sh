@@ -45,7 +45,7 @@ cd "$PROJECT_ROOT"
 echo -e "${BLUE}[Backend]${NC} Starting HTTP Gateway on port 3000..."
 bun run src/gateway/http-gateway.ts 2>&1 | sed "s/^/$(echo -e ${GREEN}[Backend]${NC}) /" &
 BACKEND_PID=$!
-
+echo -e "${YELLOW}[HTTP Gateway]${NC} HTTP Gateway started with PID $BACKEND_PID"
 # Wait a bit for backend to start
 sleep 2
 
