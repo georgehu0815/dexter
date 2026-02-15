@@ -36,11 +36,23 @@ Dexter takes complex financial questions and turns them into clear, step-by-step
 ## ✅ Prerequisites
 
 - [Bun](https://bun.com) runtime (v1.0 or higher)
-- Azure OpenAI access (uses managed identity - no API key needed in production)
-  - For local development, ensure you're logged in via Azure CLI: `az login`
-  - Alternatively, use OpenAI API key (get [here](https://platform.openai.com/api-keys))
+- **LLM Provider** (choose one):
+  - **Claude/Anthropic** (Default) - Uses TokenManager for automatic credential management
+    - Option A: Install [Claude Code](https://claude.ai/claude-code) and log in (macOS keychain integration, no API key needed)
+    - Option B: Get an API key from [Anthropic](https://console.anthropic.com/)
+  - **Azure OpenAI** (Alternative) - Uses managed identity, no API key needed in production
+    - For local development, ensure you're logged in via Azure CLI: `az login`
+  - **Other providers**: OpenAI, Google, XAI, OpenRouter, Ollama (see [switching guide](SWITCHING_LLM_PROVIDERS.md))
 - Financial Datasets API key (get [here](https://financialdatasets.ai))
-- Exa API key (get [here](https://exa.ai)) - optional, for web search
+- **Web Search API** (optional, choose one):
+  - **Exa** (Recommended) - Get API key [here](https://exa.ai)
+  - **Perplexity** - Get API key [here](https://www.perplexity.ai/settings/api)
+  - **Tavily** - Get API key [here](https://tavily.com)
+  - See [SEARCH_TOOLS_SETUP_GUIDE.md](SEARCH_TOOLS_SETUP_GUIDE.md) for detailed setup
+
+> **💡 Quick References:**
+> - **LLM Providers:** [SWITCHING_LLM_PROVIDERS.md](SWITCHING_LLM_PROVIDERS.md) - Switch between Claude, Azure OpenAI, and other providers
+> - **Search Tools:** [SEARCH_TOOLS_SETUP_GUIDE.md](SEARCH_TOOLS_SETUP_GUIDE.md) - Configure Exa, Perplexity, or Tavily search
 
 #### Installing Bun
 
@@ -79,7 +91,15 @@ bun install
 # Copy the example environment file
 cp env.example .env
 
-# Azure OpenAI Configuration (Default Provider)
+# Claude/Anthropic Configuration (Default Provider)
+# The TokenManager will automatically retrieve the API key from:
+# 1. Environment variable ANTHROPIC_API_KEY (if set below)
+# 2. macOS keychain (if Claude Code is installed with valid credentials)
+# You only need to set ANTHROPIC_API_KEY if you want to use a specific key
+# or if you're not on macOS / don't have Claude Code installed
+# ANTHROPIC_API_KEY=your-anthropic-api-key
+
+# Azure OpenAI Configuration (Alternative Provider)
 # Configure your Azure OpenAI endpoint and deployment
 # AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
 # AZURE_OPENAI_DEPLOYMENT=your-deployment-name
@@ -91,7 +111,6 @@ cp env.example .env
 
 # Alternative LLM Provider API Keys (optional)
 # OPENAI_API_KEY=your-openai-api-key (use openai: prefix for models)
-# ANTHROPIC_API_KEY=your-anthropic-api-key (optional)
 # GOOGLE_API_KEY=your-google-api-key (optional)
 # XAI_API_KEY=your-xai-api-key (optional)
 # OPENROUTER_API_KEY=your-openrouter-api-key (optional)
@@ -108,6 +127,8 @@ cp env.example .env
 
 # Note: NODE_ENV=production uses Azure Managed Identity
 # NODE_ENV=development uses Azure CLI credentials
+
+# See SWITCHING_LLM_PROVIDERS.md for detailed instructions on switching providers
 ```
 
 ## 🚀 How to Run

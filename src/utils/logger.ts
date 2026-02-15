@@ -31,6 +31,15 @@ class DebugLogger {
     if (this.logs.length > this.maxLogs) {
       this.logs = this.logs.slice(-this.maxLogs);
     }
+
+    // Also output to console
+    const consoleMethod = level === 'error' ? console.error : level === 'warn' ? console.warn : console.log;
+    if (data !== undefined) {
+      consoleMethod(`[${level.toUpperCase()}]`, message, data);
+    } else {
+      consoleMethod(`[${level.toUpperCase()}]`, message);
+    }
+
     this.emit();
   }
 

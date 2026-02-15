@@ -1,4 +1,4 @@
-export type ChannelId = 'whatsapp';
+export type ChannelId = 'whatsapp' | 'http';
 
 export type ChannelRuntimeSnapshot = {
   accountId: string;

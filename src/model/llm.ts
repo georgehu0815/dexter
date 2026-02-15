@@ -21,9 +21,10 @@ import {
   AZURE_OPENAI_SCOPE,
   AZURE_OPENAI_MANAGED_IDENTITY_CLIENT_ID,
 } from './azure-openai-models.js';
+import { TokenManager } from './token-manager.js';
 
-export const DEFAULT_PROVIDER = 'azureopenai';
-export const DEFAULT_MODEL = 'gpt-5.2';
+export const DEFAULT_PROVIDER = 'anthropic';
+export const DEFAULT_MODEL = 'claude-sonnet-4-5-20250929';
 
 /**
  * Gets the fast model variant for the given provider.
@@ -63,6 +64,19 @@ function getApiKey(envVar: string): string {
   if (!apiKey) {
     throw new Error(`[LLM] ${envVar} not found in environment variables`);
   }
+  return apiKey;
+}
+
+// Get Anthropic API key using TokenManager (supports keychain + env)
+function getAnthropicApiKey(): string {
+  const tokenManager = new TokenManager({ verbose: true });
+  const apiKey = tokenManager.getAnthropicApiKey();
+
+  if (!apiKey) {
+    throw new Error('[LLM] ANTHROPIC_API_KEY not found in environment or macOS keychain. Please set ANTHROPIC_API_KEY in .env or ensure Claude Code is installed with valid credentials.');
+  }
+
+  logger.info('[LLM] Using Claude/Anthropic API key from ' + (process.env.ANTHROPIC_API_KEY ? 'environment' : 'keychain'));
   return apiKey;
 }
 
@@ -131,7 +145,7 @@ const MODEL_FACTORIES: Record<string, ModelFactory> = {
     new ChatAnthropic({
       model: name,
       ...opts,
-      apiKey: getApiKey('ANTHROPIC_API_KEY'),
+      apiKey: getAnthropicApiKey(),
     }),
   google: (name, opts) =>
     new ChatGoogleGenerativeAI({
