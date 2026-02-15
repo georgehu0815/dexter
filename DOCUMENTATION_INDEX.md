@@ -133,6 +133,44 @@ Complete guide to all documentation available for the Dexter AI financial resear
 
 ---
 
+## 🧪 Evaluations & Testing
+
+### [RUNNING_EVALS.md](RUNNING_EVALS.md) ⭐ NEW
+**Comprehensive guide for running evaluations**
+- Complete evaluation system overview
+- LangSmith integration and setup
+- Running full and sample evaluations
+- Understanding the dataset (236 financial questions)
+- Interpreting results and metrics
+- LLM-as-judge evaluation methodology
+- Customization and extension guide
+- Development workflow and best practices
+- Troubleshooting common issues
+
+**Pages:** 35+ pages
+**Dataset:** 236 financial Q&A pairs
+**Evaluator:** GPT-5.2 (LLM-as-judge)
+
+**Audience:** Developers, QA engineers, researchers
+
+### [EVALS_QUICK_REFERENCE.md](EVALS_QUICK_REFERENCE.md) ⭐ NEW
+**Quick reference for evaluations**
+- Quick commands for running evals
+- Terminal UI legend and interpretation
+- Dataset information at a glance
+- Scoring system explained
+- Common use cases and workflows
+- LangSmith URLs and tips
+- Troubleshooting table
+- Performance optimization tips
+
+**Format:** Quick reference card
+**Best for:** Running evals quickly, daily development
+
+**Audience:** Developers running evaluations
+
+---
+
 ## 📖 Documentation Map
 
 ```
@@ -151,7 +189,13 @@ Dexter Documentation
 ├── Architecture
 │   ├── ARCHITECTURE.md                     # System design (markdown)
 │   ├── ARCHITECTURE.pdf                    # System design (PDF)
-│   └── ARCHITECTURE_DIAGRAMS_README.md    # Diagram usage guide
+│   ├── ARCHITECTURE_DIAGRAMS_README.md    # Diagram usage guide
+│   ├── SYSTEM_ARCHITECTURE_DIAGRAMS.md    # System diagrams (detailed)
+│   └── DIAGRAMS_QUICK_REFERENCE.md        # Diagram quick ref
+│
+├── Evaluations & Testing
+│   ├── RUNNING_EVALS.md                    # Evaluations guide (detailed)
+│   └── EVALS_QUICK_REFERENCE.md           # Evaluations (quick)
 │
 └── This Document
     └── DOCUMENTATION_INDEX.md              # You are here
@@ -169,6 +213,8 @@ Dexter Documentation
 **Understand the system architecture**
 → [ARCHITECTURE.md](ARCHITECTURE.md) (developers)
 → [ARCHITECTURE.pdf](ARCHITECTURE.pdf) (stakeholders)
+→ [SYSTEM_ARCHITECTURE_DIAGRAMS.md](SYSTEM_ARCHITECTURE_DIAGRAMS.md) (system diagrams)
+→ [DIAGRAMS_QUICK_REFERENCE.md](DIAGRAMS_QUICK_REFERENCE.md) (diagram quick ref)
 
 **Switch LLM providers**
 → [SWITCHING_LLM_PROVIDERS.md](SWITCHING_LLM_PROVIDERS.md) (detailed guide)
@@ -177,6 +223,10 @@ Dexter Documentation
 **Set up web search**
 → [SEARCH_TOOLS_SETUP_GUIDE.md](SEARCH_TOOLS_SETUP_GUIDE.md) (detailed guide)
 → [SEARCH_TOOLS_QUICK_REF.md](SEARCH_TOOLS_QUICK_REF.md) (quick setup)
+
+**Run evaluations and tests**
+→ [RUNNING_EVALS.md](RUNNING_EVALS.md) (detailed guide)
+→ [EVALS_QUICK_REFERENCE.md](EVALS_QUICK_REFERENCE.md) (quick commands)
 
 **Print documentation**
 → [ARCHITECTURE.pdf](ARCHITECTURE.pdf)
@@ -202,6 +252,7 @@ Dexter Documentation
 2. [ARCHITECTURE.md](ARCHITECTURE.md) - System design
 3. [SWITCHING_LLM_PROVIDERS.md](SWITCHING_LLM_PROVIDERS.md) - Configuration
 4. [SEARCH_TOOLS_SETUP_GUIDE.md](SEARCH_TOOLS_SETUP_GUIDE.md) - Tools setup
+5. [RUNNING_EVALS.md](RUNNING_EVALS.md) - Running evaluations
 
 ### Team Onboarding
 1. [README.md](README.md) - Project overview
@@ -226,13 +277,17 @@ Dexter Documentation
 | README.md | 10 | Overview, setup, usage | Markdown |
 | ARCHITECTURE.md | 50+ | System design, 10 diagrams | Markdown + Mermaid |
 | ARCHITECTURE.pdf | 50+ | System design, 9 diagrams | PDF |
+| SYSTEM_ARCHITECTURE_DIAGRAMS.md | 45+ | System diagrams (3), detailed layers | Markdown |
+| DIAGRAMS_QUICK_REFERENCE.md | 8 | Diagram quick ref | Markdown |
 | SWITCHING_LLM_PROVIDERS.md | 20+ | 9 LLM providers | Markdown |
 | SEARCH_TOOLS_SETUP_GUIDE.md | 30+ | 3 search providers | Markdown |
+| RUNNING_EVALS.md | 35+ | Evaluations, LangSmith, 236 questions | Markdown |
+| EVALS_QUICK_REFERENCE.md | 8 | Evals quick ref | Markdown |
 | QUICK_REFERENCE.md | 5 | LLM quick ref | Markdown |
 | SEARCH_TOOLS_QUICK_REF.md | 5 | Search quick ref | Markdown |
 | ARCHITECTURE_DIAGRAMS_README.md | 5 | Diagram usage | Markdown |
 
-**Total:** 175+ pages of documentation
+**Total:** 270+ pages of documentation
 
 ---
 
