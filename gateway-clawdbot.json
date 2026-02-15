@@ -1,0 +1,17 @@
+{
+  "gateway": {
+    "accountId": "default",
+    "botName": "clawdbot",
+    "logLevel": "info"
+  },
+  "channels": {
+    "whatsapp": {
+      "enabled": true,
+      "accounts": {},
+      "allowFrom": [
+        "+13522355298"
+      ]
+    }
+  },
+  "bindings": []
+}

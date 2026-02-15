@@ -47,7 +47,23 @@ async function handleInbound(cfg: GatewayConfig, inbound: WhatsAppInboundMessage
   const bodyPreview = elide(inbound.body.replace(/\n/g, ' '), 50);
   console.log(`Inbound message ${inbound.from} (${inbound.chatType}, ${inbound.body.length} chars): "${bodyPreview}"`);
   debugLog(`[gateway] handleInbound from=${inbound.from} body="${inbound.body.slice(0, 30)}..."`);
-  
+
+  // Check for bot prefix in message (e.g., "@dexter" or "@clawdbot")
+  const configuredBotName = cfg.gateway.botName?.toLowerCase().trim();
+  const prefixMatch = inbound.body.match(/^@(\w+)\s+/);
+  const messageBotPrefix = prefixMatch?.[1]?.toLowerCase();
+
+  // If a prefix is present, check if it matches our bot name
+  if (messageBotPrefix && configuredBotName && messageBotPrefix !== configuredBotName) {
+    debugLog(`[gateway] skipping message - prefix '@${messageBotPrefix}' doesn't match bot '${configuredBotName}'`);
+    console.log(`Skipping message - directed at @${messageBotPrefix}, not @${configuredBotName}`);
+    return;
+  }
+
+  // Strip the bot prefix from the message if present
+  const processedBody = prefixMatch ? inbound.body.slice(prefixMatch[0].length) : inbound.body;
+  debugLog(`[gateway] processed body="${processedBody.slice(0, 30)}..." (prefix stripped: ${!!prefixMatch})`);
+
   const route = resolveRoute({
     cfg,
     channel: 'whatsapp',
@@ -100,23 +116,24 @@ async function handleInbound(cfg: GatewayConfig, inbound: WhatsAppInboundMessage
     const startedAt = Date.now();
     const answer = await runAgentForMessage({
       sessionKey: route.sessionKey,
-      query: inbound.body,
+      query: processedBody,
       model: 'gpt-5.2',
       modelProvider: 'openai',
     });
     const durationMs = Date.now() - startedAt;
     debugLog(`[gateway] agent answer length=${answer.length}`);
-    
+
     // Stop typing loop before sending reply
     stopTypingLoop();
 
     if (answer.trim()) {
       // Clean up markdown for WhatsApp and reply
       const cleanedAnswer = cleanMarkdownForWhatsApp(answer);
+      const botLabel = cfg.gateway.botName || 'Dexter';
       debugLog(`[gateway] sending reply to ${inbound.replyToJid}`);
       await sendMessageWhatsApp({
         to: inbound.replyToJid,
-        body: `[Dexter] ${cleanedAnswer}`,
+        body: `[${botLabel}] ${cleanedAnswer}`,
         accountId: inbound.accountId,
       });
       console.log(`Sent reply (${answer.length} chars, ${durationMs}ms)`);

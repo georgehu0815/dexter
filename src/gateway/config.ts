@@ -30,6 +30,7 @@ const GatewayConfigSchema = z.object({
   gateway: z
     .object({
       accountId: z.string().optional(),
+      botName: z.string().optional(),
       logLevel: z.enum(['silent', 'error', 'info', 'debug']).optional(),
       heartbeatSeconds: z.number().optional(),
       reconnect: ReconnectSchema.optional(),
@@ -65,6 +66,7 @@ const GatewayConfigSchema = z.object({
 export type GatewayConfig = {
   gateway: {
     accountId: string;
+    botName?: string;
     logLevel: 'silent' | 'error' | 'info' | 'debug';
     heartbeatSeconds?: number;
     reconnect?: {
@@ -123,6 +125,7 @@ export function loadGatewayConfig(overridePath?: string): GatewayConfig {
     ...parsed,
     gateway: {
       accountId: parsed.gateway?.accountId ?? 'default',
+      botName: parsed.gateway?.botName,
       logLevel: parsed.gateway?.logLevel ?? 'info',
       heartbeatSeconds: parsed.gateway?.heartbeatSeconds,
       reconnect: parsed.gateway?.reconnect,
